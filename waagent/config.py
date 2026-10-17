@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     llm_provider: str = "mock"  # mock | groq | openai
     groq_api_key: str = ""
     openai_api_key: str = ""
-    llm_model: str = "llama-3.3-70b-versatile"
+    llm_model: str = "openai/gpt-oss-120b"
 
     # --- Embeddings --------------------------------------------------------
     embedder: str = "mock"  # mock | openai

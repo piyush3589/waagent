@@ -47,6 +47,14 @@ def _print(result: AgentResult) -> None:
 
 
 def main() -> None:
+    # Real models can reply in any language/emoji; the Windows console defaults
+    # to cp1252 and would crash on non-ASCII. Force UTF-8 on stdout/stderr.
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8")
+        except (AttributeError, ValueError):
+            pass
+
     parser = argparse.ArgumentParser(description="wa-agent WhatsApp-style chat simulator.")
     parser.add_argument("message", nargs="*", help="one-shot message")
     parser.add_argument("--user", default=None, help="user id / phone")
