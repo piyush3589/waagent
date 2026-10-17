@@ -8,8 +8,7 @@
 [![LangGraph](https://img.shields.io/badge/LangGraph-state%20graph-1C3C3C?style=flat-square)](https://langchain-ai.github.io/langgraph/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-webhook-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Postgres](https://img.shields.io/badge/Postgres-pgvector-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://github.com/pgvector/pgvector)
-[![Tests](https://img.shields.io/badge/Tests-29%20passed-brightgreen?style=flat-square)](#-verification)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+[![Tests](https://img.shields.io/badge/Tests-29%20passed-brightgreen?style=flat-square)](#proof-it-works)
 
 *Plan &rarr; Retrieve memory &rarr; Call tools &rarr; Respond &rarr; Hand off to human — with short-term and long-term memory that measurably makes it smarter.*
 
@@ -213,7 +212,7 @@ All tools are **read-only** and **typed** (Pydantic input models). The same regi
 ## Project structure
 
 ```
-whatsapp-agent-fix/
+waagent/
 ├── waagent/                  # Core agent package
 │   ├── agent.py              #   LangGraph graph: planner→retrieve→tools→responder→handoff
 │   ├── memory.py             #   Redis sessions, compaction, pgvector semantic memory
@@ -250,7 +249,7 @@ whatsapp-agent-fix/
 | 🔶 **Stubbed** | Order/FAQ/refund data (realistic shapes, no external system) · human-handoff destination |
 | ❌ **Not included** | A real Meta number (webhook is simulator-first but Meta-shaped) · multi-tenant auth · cloud deploy docs |
 
-> **Honesty note:** The Postgres/pgvector + Redis path is written and `docker compose config` validates, but has never been run end-to-end on this machine (Docker engine issues). Everything is verified on the SQLite/dict fallback. See `AGENTS.md` for details.
+> **Honesty note:** The Postgres/pgvector + Redis path is written and `docker compose config` validates, but has never been run end-to-end (Docker engine issues). Everything is verified on the SQLite/dict fallback.
 
 ---
 
@@ -263,18 +262,6 @@ whatsapp-agent-fix/
 - [ ] CI + ruff/mypy + Alembic migrations
 - [ ] Webhook idempotency
 - [ ] Deploy sketch: ECS + RDS + ElastiCache
-
----
-
-## Documentation
-
-| File | What it covers |
-|------|---------------|
-| [`WHAT_IT_DOES.md`](WHAT_IT_DOES.md) | Plain-English explanation of the project |
-| [`HOW_TO_RUN.md`](HOW_TO_RUN.md) | Step-by-step run instructions (no coding) |
-| [`BUILD_PLAN.md`](BUILD_PLAN.md) | Full architecture plan and milestones |
-| [`AGENTS.md`](AGENTS.md) | Project status, decisions, and next steps for AI assistants |
-| [`PRODUCTION_READINESS.md`](PRODUCTION_READINESS.md) | Production readiness assessment |
 
 ---
 
