@@ -1,0 +1,25 @@
+IS THIS A PORTFOLIO PROJECT?
+============================
+
+Yes - and a strong one, for the role it targets (founding engineer, AI / agentic
+systems). It shows the things hiring managers actually look for: an agent loop, a
+real memory pipeline, tool use, human handoff, an async worker, an API, tests,
+and an honest evaluation with a measured result instead of vague claims.
+
+What makes it work as a portfolio piece is the depth and the honesty. Many
+candidates show a chatbot that calls an LLM once. Yours shows system thinking:
+short-term vs long-term memory, a write policy, PII handling, a queue, latency
+metrics, and a scorecard proving the memory actually helps (12/12 vs 8/12). The
+README being upfront about what is mock and what is not is a plus, not a minus;
+it signals seniority.
+
+The caveats are the same ones as before: it is a prototype, the database path
+never really ran, and there is no deployment or monitoring. For portfolio
+purposes that is mostly fine, but two things would raise it a level: get the
+Postgres/pgvector path actually running once, and add a short "architecture and
+tradeoffs" write-up plus a demo GIF or short screen recording. Recruiters rarely
+read code; they look at the README, the picture, and the result.
+
+So: as a portfolio project, yes, it is a good one. Present it as a realistic
+blueprint with honest limits rather than as a finished product, and it will land
+well for AI / agentic or backend founding-engineer roles.

@@ -1,0 +1,64 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: waagent
+      POSTGRES_PASSWORD: waagent
+      POSTGRES_DB: waagent
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U waagent -d waagent"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  api:
+    build: .
+    command: uvicorn waagent.api:app --host 0.0.0.0 --port 8000
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      WA_DATABASE_URL: postgresql+psycopg2://waagent:waagent@db:5432/waagent
+      WA_REDIS_URL: redis://redis:6379/0
+      WA_LOG_LEVEL: INFO
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build: .
+    command: python -m waagent.worker
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      WA_DATABASE_URL: postgresql+psycopg2://waagent:waagent@db:5432/waagent
+      WA_REDIS_URL: redis://redis:6379/0
+      WA_LOG_LEVEL: INFO
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  pgdata:

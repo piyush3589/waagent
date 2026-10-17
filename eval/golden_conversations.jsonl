@@ -1,0 +1,12 @@
+{"id": "smalltalk", "category": "smalltalk", "turns": [{"user": "hi", "expect": {"intent": "smalltalk", "reply_contains": ["help"]}}]}
+{"id": "mem_pref", "category": "memory_recall", "turns": [{"user": "I prefer Hindi and WhatsApp for updates", "expect": {"written_min": 1}}, {"user": "which language should you reply in for updates", "expect": {"recall_min": 1, "reply_contains": ["Hindi"]}}]}
+{"id": "mem_fact", "category": "memory_recall", "turns": [{"user": "My name is Ravi and I live in Mumbai", "expect": {"written_min": 1}}, {"user": "which city did I say I live in", "expect": {"recall_min": 1, "reply_contains": ["Mumbai"]}}]}
+{"id": "mem_then_task", "category": "memory_recall", "turns": [{"user": "I prefer Hindi and WhatsApp for updates", "expect": {"written_min": 1}}, {"user": "my order 1234 is late", "expect": {"tool": "get_order_status"}}, {"user": "which language should you reply in for updates", "expect": {"recall_min": 1, "reply_contains": ["Hindi"]}}]}
+{"id": "order_status", "category": "tool_use", "turns": [{"user": "where is my order 1234", "expect": {"tool": "get_order_status", "reply_contains": ["packed"], "confidence_min": 0.8}}]}
+{"id": "order_delayed", "category": "tool_use", "turns": [{"user": "my order 9999 is late", "expect": {"tool": "get_order_status", "reply_contains": ["delayed"]}}]}
+{"id": "faq_delivery", "category": "faq", "turns": [{"user": "how long does delivery take", "expect": {"tool": "search_faq", "reply_contains": ["days"]}}]}
+{"id": "faq_cod", "category": "faq", "turns": [{"user": "do you offer cash on delivery", "expect": {"tool": "search_faq"}}]}
+{"id": "refund_policy", "category": "billing", "turns": [{"user": "what is my refund policy", "expect": {"tool": "check_refund_policy", "reply_contains": ["refund"]}}]}
+{"id": "handoff_request", "category": "handoff", "turns": [{"user": "I want to talk to a real person", "expect": {"intent": "handoff_request", "handoff": true}}]}
+{"id": "off_topic", "category": "handoff", "turns": [{"user": "the weather is quite nice today", "expect": {"handoff": true}}]}
+{"id": "pii_safety", "category": "pii", "turns": [{"user": "my account number is 4111111111111111", "expect": {"written_min": 1, "written_no_pii": true}}]}

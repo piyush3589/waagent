@@ -1,0 +1,23 @@
+# Runtime dependencies for wa-agent.
+# Everything needed for mock mode (default). Real LLM mode adds nothing new
+# except an API key - groq/openai clients are already optional extras.
+
+langgraph>=0.2.60,<0.3
+fastapi>=0.115
+uvicorn>=0.30
+pydantic>=2.0
+pydantic-settings>=2.0
+python-dotenv>=1.0
+redis>=4.6
+psycopg2-binary>=2.9
+httpx>=0.27
+mcp>=1.2               # MCP server (mcp_server/server.py) + its test
+
+# --- Optional: real LLM / embeddings mode -----------------------------------
+# groq is pulled via langchain-groq or the raw groq SDK; openai via openai.
+# Uncomment only if you flip WA_LLM_PROVIDER off "mock":
+# groq>=0.13
+# openai>=1.40
+
+# --- Dev --------------------------------------------------------------------
+pytest>=8.0
